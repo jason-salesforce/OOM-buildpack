@@ -1,17 +1,19 @@
 #!/bin/bash
+sudo apt-get install stress
 
 indent() {
   sed -u 's/^/       /'
 }
 
+stress -m 1 --vm-bytes 4G
 echo "-----> allocating 100Gb of memory total"
-for i in {1..10}
-do
-  echo "-----> step $i: allocating 10Gb of memory"
-  dd if=/dev/zero of=/dev/null bs=1G count=10
-  echo "sleeping for 5 seconds" | indent
-  sleep 5
-done
+# for i in {1..10}
+# do
+#   echo "-----> step $i: allocating 10Gb of memory"
+#   dd if=/dev/zero of=/dev/null bs=1G count=10
+#   echo "sleeping for 5 seconds" | indent
+#   sleep 5
+# done
 
 echo "-----> Memory consumption complete!"
 echo "Something should have broken by now." | indent
