@@ -5,11 +5,10 @@ indent() {
   sed -u 's/^/       /'
 }
 
-echo "-----> allocating 100Gb of memory total"
 for i in {1..10}
 do
   echo "-----> step $i: allocating 10Gb of memory"
-  dd if=/dev/zero of=/dev/null bs=20G count=10
+  dd if=/dev/urandom of=$i.bin bs=64M count=16 iflag=fullblock
   free -m | awk 'NR==2{printf "%.2f%%\t\t", $3*100/$2 }'
   echo "sleeping for 5 seconds" | indent
   sleep 5
