@@ -1,11 +1,12 @@
 #!/bin/bash
-
 echo "begin allocating memory..."
 for index in $(seq 1000); do
-    value=$(seq -w -s '' $index $(($index + 1000000)))
+    value=$(seq -w -s '' $index $(($index + 10000000)))
     eval array$index=$value
+    free -h
 done
-echo "...end allocating memory"
+
+free -h
 
 echo "sleeping for 1"
 sleep 1
