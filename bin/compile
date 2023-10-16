@@ -1,16 +1,14 @@
 #!/bin/bash
-indent() {
-  sed -u 's/^/       /'
-}
 
-for i in {1..10}
-do
-  echo "-----> step $i: allocating 10Gb of memory"
-  dd if=/dev/urandom of=$i.bin bs=6400M count=16 iflag=fullblock
-  free -m | awk 'NR==2{printf "%.2f%%\t\t", $3*100/$2 }'
-  echo "sleeping for 5 seconds" | indent
-  sleep 5
+echo "begin allocating memory..."
+for index in $(seq 1000); do
+    value=$(seq -w -s '' $index $(($index + 1000000)))
+    eval array$index=$value
 done
+echo "...end allocating memory"
+
+echo "sleeping for 1"
+sleep 1
 
 echo "-----> Memory consumption complete!"
-echo "Something should have broken by now." | indent
+echo "Something should have broken by now."
