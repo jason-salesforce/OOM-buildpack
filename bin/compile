@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 indent() {
   sed -u 's/^/       /'
@@ -7,7 +7,7 @@ indent() {
 echo "-----> allocating 100Gb of memory total"
 for i in {1..10}
 do
-  echo "-----> allocating 10Gb of memory"
+  echo "-----> step $i: allocating 10Gb of memory"
   dd if=/dev/zero of=/dev/null bs=1G count=10
   echo "sleeping for 5 seconds" | indent
   sleep 5
